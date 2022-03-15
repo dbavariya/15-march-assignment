@@ -1,2 +1,2 @@
-# 15-march-assignment
+# assignment
 JS Assignment
