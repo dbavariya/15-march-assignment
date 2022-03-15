@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Registration Form</title>
+
+</head>
+
+<body>
+    <!-- Simple Registration Form -->
+    <div class="container">
+        <h2>Display Form with Validations</h2>
+
+        <div class="row">
+            <div class="col-md-6">
+                <form id="example" onsubmit="submit()">
+                    <div class="form-group">
+                        <label for="inputName">Name :</label>
+                        <input type="text" class="form-control" onblur="validateName()" id="inputName" placeholder="Enter Name" name="name" required>
+                        <small id="nameValidationMsg" class="form-text text-danger"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputEmail">Email :</label>
+                        <input type="email" class="form-control" onblur="validateEmail()" id="inputEmail" placeholder="Enter Email" name="email" required>
+                        <small id="emailValidationMsg" class="form-text text-danger"></small>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="inputAge">Age :</label>
+                        <input type="text" class="form-control" onblur="validateAge()" id="inputAge" placeholder="Enter Age" name="age" required>
+                        <small id="ageValidationMsg" class="form-text text-danger"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputPhone">Phone:</label>
+                        <input type="number" class="form-control" onblur="validatePhone()" id="inputPhone" placeholder="Enter mobile" name="phone" required>
+                        <small id="phoneValidationMsg" class="form-text text-danger"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword">Password:</label><br/>
+                        <span style="font-size: 10px;">Minimum eight characters, at least one uppercase letter, one lowercase letter and one number:</span>
+                        <input type="password" class="form-control" onblur="validatePassword()" id="inputPassword" placeholder="Enter password" name="pswd" required>
+                        <small id="passwordValidationMsg" class="form-text text-danger"></small>
+                    </div>
+                    <div>
+                        <button onclick="submit1()" type="submit">Submit</button>
+                        <button type="reset">Reset</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--/ Simple Registration Form -->
+</body>
+<script>
+    var email = 0;
+    var name = 0;
+    var age = 0;
+    var phone = 0;
+    var photo = 0;
+    var password = 0;
+
+    var form = document.getElementById('example');
+
+    function validateName() {
+        let inputName = form.inputName.value;
+        let nameValidationMsg = document.getElementById('nameValidationMsg');
+
+        if (inputName) {
+            if (/^[A-Za-z][A-Za-z\'\-]+([\ A-Za-z][A-Za-z\'\-]+)*/.test(inputName)) {
+                nameValidationMsg.textContent = "Name is Valid";
+                nameValidationMsg.classList.remove('text-danger');
+                nameValidationMsg.classList.add('text-success');
+                return true;
+
+            } else {
+                nameValidationMsg.textContent = "Invalid Name";
+                nameValidationMsg.classList.add('text-danger');
+                nameValidationMsg.classList.remove('text-success');
+                return false;
+
+            }
+        } else {
+            nameValidationMsg.textContent = "Name cannot empty";
+            return false;
+
+        }
+    }
+
+    function validateEmail() {
+        let inputEmail = form.inputEmail.value;
+        let emailValidationMsg = document.getElementById('emailValidationMsg');
+
+        if (inputEmail) {
+            if (/^([\w\.\+]{1,})([^\W])(@)([\w]{1,})(\.[\w]{1,})+$/.test(inputEmail)) {
+
+                emailValidationMsg.textContent = "Email is Valid";
+                emailValidationMsg.classList.remove('text-danger');
+                emailValidationMsg.classList.add('text-success');
+                return true;
+
+
+            } else {
+                emailValidationMsg.textContent = "Invalid Email";
+
+                emailValidationMsg.classList.add('text-danger');
+                emailValidationMsg.classList.remove('text-success');
+                return false;
+
+            }
+        } else {
+            emailValidationMsg.textContent = "Email cannot empty";
+            return false;
+
+        }
+    }
+
+
+    function validateAge() {
+        let inputAge = form.inputAge.value;
+        let ageValidationMsg = document.getElementById('ageValidationMsg');
+
+        if (inputAge) {
+            if (inputAge >= 18) {
+
+                ageValidationMsg.textContent = "Age is Valid";
+                ageValidationMsg.classList.remove('text-danger');
+                ageValidationMsg.classList.add('text-success');
+
+                age = 1;
+                return true;
+
+
+            } else {
+                ageValidationMsg.textContent = "You are not eligible";
+
+                ageValidationMsg.classList.add('text-danger');
+                ageValidationMsg.classList.remove('text-success');
+
+                age = 0;
+                return false;
+
+            }
+        } else {
+            ageValidationMsg.textContent = "Age cannot empty";
+            ageValidationMsg.classList.add('text-danger');
+            ageValidationMsg.classList.remove('text-success');
+            return false;
+
+
+            age = 0;
+        }
+    }
+
+
+    function validatePhone() {
+        let inputPhone = form.inputPhone.value;
+        let inputPhone1 = form.inputPhone.value.length;
+        let phoneValidationMsg = document.getElementById('phoneValidationMsg');
+        if (inputPhone1 != 10) {
+            phoneValidationMsg.textContent = "Number is Not Valid";
+            phoneValidationMsg.classList.add('text-danger');
+            phoneValidationMsg.classList.remove('text-success');
+        } else if (inputPhone) {
+            if (/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/.test(inputPhone)) {
+
+                phoneValidationMsg.textContent = "Phone is Valid";
+                phoneValidationMsg.classList.remove('text-danger');
+                phoneValidationMsg.classList.add('text-success');
+                return true;
+
+
+            } else {
+                phoneValidationMsg.textContent = "Invalid Number";
+                phoneValidationMsg.classList.add('text-danger');
+                phoneValidationMsg.classList.remove('text-success');
+                return false;
+
+            }
+        } else {
+            phoneValidationMsg.textContent = "Phone cannot empty";
+            phoneValidationMsg.classList.add('text-danger');
+            phoneValidationMsg.classList.remove('text-success');
+            return false;
+
+        }
+    }
+
+    function validatePassword() {
+        let inputPassword = form.inputPassword.value;
+        let inputPasswordl = form.inputPassword.value.length;
+        let passwordValidationMsg = document.getElementById('passwordValidationMsg');
+        let pattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,}$/;
+
+        if (inputPassword) {
+            if (inputPassword.match(pattern)) {
+                passwordValidationMsg.textContent = "Password is Valid";
+                passwordValidationMsg.classList.remove('text-danger');
+                passwordValidationMsg.classList.add('text-success');
+                return true;
+            } else {
+                passwordValidationMsg.textContent = "Invalid Password";
+                passwordValidationMsg.classList.add('text-danger');
+                passwordValidationMsg.classList.remove('text-success');
+                return false;
+            }
+        } else {
+            passwordValidationMsg.textContent = "password cannot empty";
+            passwordValidationMsg.classList.add('text-danger');
+            passwordValidationMsg.classList.remove('text-success');
+        }
+
+    }
+
+
+
+
+    // console.log(validateName());
+
+    function submit1() {
+        let v1 = validateName();
+        let v2 = validateEmail();
+        let v3 = validateAge();
+        let v4 = validatePhone();
+        let v5 = validatePassword();
+
+        if (v1 && v2 && v3 && v4 && v5) {
+            Alert("submitted")
+        } else {
+            alert("Error")
+        }
+    }
+</script>
+
+</html>
